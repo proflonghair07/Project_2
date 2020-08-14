@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
@@ -32,18 +33,18 @@ module.exports = function(app) {
       });
   });
 
-  app.post("/api/userscore", (req, res)=> {
+  app.post("/api/userscore", (req, res) => {
     // db.user.findone update by id
     // find user by id update score key
     // grab request body.
-  })
-  app.post("/api/jointeam", (req, res){
+  });
+  app.post("/api/jointeam", (req, res) => {
     // grab from req body.
     // find user by id and then update team id.
-  })
-  app.get("/api/teamscore", (req, res)=> {
+  });
+  app.get("/api/teamscore", (req, res) => {
     // find all teams, avg out user scores.
-  })
+  });
   // Route for logging user out
   app.get("/logout", (req, res) => {
     req.logout();

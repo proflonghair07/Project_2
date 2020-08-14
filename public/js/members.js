@@ -1,45 +1,46 @@
+/* eslint-disable no-unused-vars */
 $(document).ready(() => {
   // This file just does a GET request to figure out which user is logged in
   // and updates the HTML on the page
-  $.get("/api/user_data").then((data) => {
+  $.get("/api/user_data").then(data => {
     $(".member-name").text(data.email);
   });
 });
 
 //quiz test
-var quizContainer = document.getElementById("quiz");
-var scoreInput = document.getElementById("score-input");
-var gameoverDiv = document.getElementById("end-display");
-var questionsDiv = document.getElementById("questions");
-var quizTimer = document.getElementById("timer");
-var startButton = document.getElementById("start-button");
-var startContainer = document.getElementById("start-container");
-var highscoreContainer = document.getElementById("highscore-container");
-var highScoreInner = document.getElementById("high-score-inner");
-var highScoreInitialsInput = document.getElementById("initials");
-var highScoreInitialsDisplay = document.getElementById("highscore-initials");
-var initialsRow = document.getElementById("initials-row");
-var scoreRow = document.getElementById("score-row");
-var endButtons = document.getElementById("end-buttons");
-var submitButton = document.getElementById("submit-button");
-var goBack = document.getElementById("go-back");
-var highScoreScoreDisplay = document.getElementById("highscore-score");
-var buttonOne = document.getElementById("1");
-var buttonTwo = document.getElementById("2");
-var buttonThree = document.getElementById("3");
-var buttonFour = document.getElementById("4");
-var buttonGrid = document.getElementById("button-grid");
-var displayCorrect = document.getElementById("display-correct");
-var displayError = document.getElementById("display-error");
+const quizContainer = document.getElementById("quiz");
+const scoreInput = document.getElementById("score-input");
+const gameoverDiv = document.getElementById("end-display");
+const questionsDiv = document.getElementById("questions");
+const quizTimer = document.getElementById("timer");
+const startButton = document.getElementById("start-button");
+const startContainer = document.getElementById("start-container");
+const highscoreContainer = document.getElementById("highscore-container");
+const highScoreInner = document.getElementById("high-score-inner");
+const highScoreInitialsInput = document.getElementById("initials");
+const highScoreInitialsDisplay = document.getElementById("highscore-initials");
+const initialsRow = document.getElementById("initials-row");
+const scoreRow = document.getElementById("score-row");
+const endButtons = document.getElementById("end-buttons");
+const submitButton = document.getElementById("submit-button");
+const goBack = document.getElementById("go-back");
+const highScoreScoreDisplay = document.getElementById("highscore-score");
+const buttonOne = document.getElementById("1");
+const buttonTwo = document.getElementById("2");
+const buttonThree = document.getElementById("3");
+const buttonFour = document.getElementById("4");
+const buttonGrid = document.getElementById("button-grid");
+const displayCorrect = document.getElementById("display-correct");
+const displayError = document.getElementById("display-error");
 // Questions array
-var questionsArray = [
+const questionsArray = [
   {
     question: "Which of the following is an example of camel case?",
     answerOne: "background-color",
     answerTwo: "BackgroundColor",
     answerThree: "backgroundColor",
     answerFour: "background.color",
-    correctAnswer: "three",
+    correctAnswer: "three"
   },
   {
     question: "JavaScript '_______' are containers for storing data values.",
@@ -47,7 +48,7 @@ var questionsArray = [
     answerTwo: "functions",
     answerThree: "strings",
     answerFour: "operators",
-    correctAnswer: "one",
+    correctAnswer: "one"
   },
   {
     question:
@@ -56,7 +57,7 @@ var questionsArray = [
     answerTwo: "of",
     answerThree: "else if",
     answerFour: "else",
-    correctAnswer: "two",
+    correctAnswer: "two"
   },
   {
     question: "What HTML tag is used to link to JavaScript",
@@ -64,7 +65,7 @@ var questionsArray = [
     answerTwo: "&lt;link&gt;",
     answerThree: "&lt;javascript&gt;",
     answerFour: "&lt;script&gt;",
-    correctAnswer: "four",
+    correctAnswer: "four"
   },
   {
     question:
@@ -73,7 +74,7 @@ var questionsArray = [
     answerTwo: "var = helloWorld",
     answerThree: "¡Hola Mundo!",
     answerFour: "printDocument.hello_world",
-    correctAnswer: "one",
+    correctAnswer: "one"
   },
   {
     question: "Boolean data types are represented by what type of value?",
@@ -81,7 +82,7 @@ var questionsArray = [
     answerTwo: "numbers",
     answerThree: "True/False",
     answerFour: "letters",
-    correctAnswer: "three",
+    correctAnswer: "three"
   },
   {
     question:
@@ -90,7 +91,7 @@ var questionsArray = [
     answerTwo: "algorithm",
     answerThree: "console",
     answerFour: "operator",
-    correctAnswer: "four",
+    correctAnswer: "four"
   },
   {
     question: "What does NaN stand for?",
@@ -98,23 +99,23 @@ var questionsArray = [
     answerTwo: "now a number",
     answerThree: "nearly a node",
     answerFour: "not a number",
-    correctAnswer: "four",
-  },
+    correctAnswer: "four"
+  }
 ];
 // More variables
-var finalQuestionIndex = questionsArray.length;
-var currentQuestionIndex = 0;
-var timeLeft = 75;
-var timerValue;
-var score = 0;
-var correct;
+const finalQuestionIndex = questionsArray.length;
+let currentQuestionIndex = 0;
+let timeLeft = 75;
+let timerValue;
+let score = 0;
+let correct;
 // Cycle through the array of quiz questions and answers and then prints them to the quiz div
 function generateQuestions() {
   gameoverDiv.style.display = "none";
   if (currentQuestionIndex === finalQuestionIndex) {
     return displayScore();
   }
-  var currentQuestion = questionsArray[currentQuestionIndex];
+  const currentQuestion = questionsArray[currentQuestionIndex];
   questionsDiv.innerHTML = "<p>" + currentQuestion.question + "</p>";
   buttonOne.innerHTML = currentQuestion.answerOne;
   buttonTwo.innerHTML = currentQuestion.answerTwo;
@@ -129,7 +130,7 @@ function startQuiz() {
   displayCorrect.innerHTML = "";
 
   //Timer
-  timerValue = setInterval(function() {
+  timerValue = setInterval(() => {
     timeLeft--;
     quizTimer.textContent = timeLeft;
 
@@ -151,37 +152,36 @@ function displayScore() {
     "You correctly answered " + score + " out of 8 questions";
 }
 // Save and stringify the array of high scores in local storage. Add new user initials and score to array. Show high scores.
-submitButton.addEventListener("click", function highscore() {
+submitButton.addEventListener("click", () => {
   if (highScoreInitialsInput.value === "") {
     displayError.textContent = "Cannot leave initials blank.";
     return false;
-  } else {
-    var savedHighscores =
-      JSON.parse(localStorage.getItem("savedHighscores")) || [];
-    var currentUser = highScoreInitialsInput.value.trim();
-    var currentHighscore = {
-      name: currentUser,
-      score: score,
-    };
-
-    gameoverDiv.style.display = "none";
-    highscoreContainer.style.display = "flex";
-    highScoreInner.style.display = "block";
-    endButtons.style.display = "flex";
-
-    savedHighscores.push(currentHighscore);
-    localStorage.setItem("savedHighscores", JSON.stringify(savedHighscores));
-    generateHighscores();
   }
+  const savedHighscores =
+    JSON.parse(localStorage.getItem("savedHighscores")) || [];
+  const currentUser = highScoreInitialsInput.value.trim();
+  const currentHighscore = {
+    name: currentUser,
+    score: score
+  };
+
+  gameoverDiv.style.display = "none";
+  highscoreContainer.style.display = "flex";
+  highScoreInner.style.display = "block";
+  endButtons.style.display = "flex";
+
+  savedHighscores.push(currentHighscore);
+  localStorage.setItem("savedHighscores", JSON.stringify(savedHighscores));
+  generateHighscores();
 });
 // Clear the current list of high scores and generate a new one from local storage.
 function generateHighscores() {
   highScoreInitialsDisplay.innerHTML = "";
   highScoreScoreDisplay.innerHTML = "";
-  var highscores = JSON.parse(localStorage.getItem("savedHighscores")) || [];
+  const highscores = JSON.parse(localStorage.getItem("savedHighscores")) || [];
   for (i = 0; i < highscores.length; i++) {
-    var newNameSpan = document.createElement("li");
-    var newScoreSpan = document.createElement("li");
+    const newNameSpan = document.createElement("li");
+    const newScoreSpan = document.createElement("li");
     newNameSpan.textContent = highscores[i].name;
     newScoreSpan.textContent = highscores[i].score;
     highScoreInitialsDisplay.appendChild(newNameSpan);
