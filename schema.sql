@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS quiz_app;
+CREATE DATABASE quiz_app;
