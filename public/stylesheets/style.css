@@ -2,3 +2,143 @@ form.signup,
 form.login {
   margin-top: 50px;
 }
+
+/* quiz test */
+li {
+  padding-bottom: 3px;
+  color: white;
+  text-shadow: 1.5px 1px 3px black;
+  list-style-type: none;
+}
+
+p {
+  color: black;
+  text-align: center;
+  font-size: 30px;
+}
+
+input {
+  text-align: center;
+}
+
+button {
+  display: inline-block;
+  background-color: #3c1261;
+  border-radius: 10px;
+  border: 3px double gray;
+  color: #eeeeee;
+  text-align: left;
+  font-size: 20px;
+  padding: 20px;
+  margin-top: 3px;
+}
+
+button:hover {
+  background-color: #52307c;
+  color: white;
+}
+
+hr {
+  border: 1px solid gray;
+}
+
+.container {
+  width: 800px;
+  max-width: 80%;
+  background-color: #f9e0ff;
+  border: solid;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 0 10px 2px;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 35px;
+}
+
+#button-grid {
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  gap: 10px;
+  margin: 20px 0;
+}
+
+#display-error,
+#display-correct {
+  padding-top: 8px;
+  font-size: 20px;
+  color: gray;
+}
+
+#start-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#timer {
+  color: black;
+  text-align: center;
+}
+#quiz {
+  display: none;
+}
+
+#end-display {
+  text-align: center;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+}
+
+#high-score-inner {
+  display: none;
+  width: 50%;
+  border: solid;
+  border-color: black;
+  border-bottom-style: groove;
+  padding-bottom: 5px;
+  background: #bca0dc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 2px;
+}
+
+#high-score-header {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 3px solid black;
+  margin-bottom: 10px;
+  padding-top: 10px;
+  background-color: #7c5295;
+  color: #eeeeee;
+}
+#highscore-container {
+  height: 100%;
+  width: 100%;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#initials {
+  margin: 8px;
+  height: 28px;
+}
+
+#highscore-initials {
+  display: inline-block;
+  padding-left: 125px;
+  font-weight: bold;
+}
+
+#highscore-score {
+  float: right;
+  padding-right: 80px;
+  font-weight: bold;
+}
+
+#end-buttons {
+  display: none;
+}
