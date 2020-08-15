@@ -2,6 +2,7 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
+const axios = require('axios');
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -45,6 +46,23 @@ module.exports = function(app) {
   app.get("/api/teamscore", (req, res) => {
     // find all teams, avg out user scores.
   });
+
+  app.post("/api/startquiz", function(req, res) {
+//   console.log("starting quiz api call.");
+
+    axios.get('https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple')
+    .then(response => {
+//      console.log("here");
+        console.log(response.data);
+        // console.log(response.data);
+        res.send(response.data);
+    })
+    .catch(error => {
+        console.log(error);
+    });
+//    res.json({});
+  });
+
   // Route for logging user out
   app.get("/logout", (req, res) => {
     req.logout();

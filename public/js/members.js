@@ -124,6 +124,18 @@ function generateQuestions() {
 }
 // Start the quiz by calling the generateQuestions function and starts the timer. hide gameoverDiv and startContainer.  Show quizContainer.
 function startQuiz() {
+
+  $.ajax("/api/startquiz", {
+    type: "POST"
+  }).then(
+    function(response) {
+//      console.log("quiz api called");
+      // Reload the page to get the updated list
+      alert("response to ajax call " + response.results);
+//      location.reload();
+    }
+  );
+
   gameoverDiv.style.display = "none";
   startContainer.style.display = "none";
   generateQuestions();
