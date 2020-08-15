@@ -1,7 +1,7 @@
 $(document).ready(() => {
   const groupForm = $("form.group");
-  const groupInput = $("input#group-input");
-
+  const groupInput = $("#group-input");
+    console.log(teamData);
   groupForm.on("submit", event => {
     event.preventDefault();
     const teamData = {
@@ -9,5 +9,6 @@ $(document).ready(() => {
     };
   });
 
-  
+    // api call to database
+    
 });
