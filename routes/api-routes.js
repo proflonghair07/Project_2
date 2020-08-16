@@ -12,7 +12,7 @@ module.exports = function(app) {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
       email: req.user.email,
-      id: req.user.id,
+      id: req.user.id
     });
   });
 
@@ -22,22 +22,38 @@ module.exports = function(app) {
   app.post("/api/signup", (req, res) => {
     db.User.create({
       email: req.body.email,
-      password: req.body.password,
+      password: req.body.password
     })
       .then(() => {
         res.redirect(307, "/api/login");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
         res.status(401).json(err);
       });
   });
 
-  app.post("/api/userscore", (req, res) => {
+  app.post("/api/userscore", (req, res) => {});
+
+  app.put("/api/userscore", (req, res) => {
     // db.user.findone update by id
     // find user by id update score key
     // grab request body.
+    db.User.update(
+      {
+        score: req.body.score
+      },
+      {
+        where: {
+          id: req.user.id
+        }
+      }
+    ).then(dbScore => {
+      res.json(dbScore);
+    });
+    console.log(req.body.score);
   });
+
   app.post("/api/jointeam", (req, res) => {
     // grab from req body.
     // find user by id and then update team id.
@@ -47,7 +63,6 @@ module.exports = function(app) {
   });
 
   app.post("/api/startquiz", (req, res) => {
-
     //   console.log("starting quiz api call.");
 
     axios
@@ -61,7 +76,6 @@ module.exports = function(app) {
         res.send(response.data);
       })
       .catch(error => {
-
         console.log(error);
       });
     //    res.json({});
@@ -83,7 +97,7 @@ module.exports = function(app) {
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         email: req.user.email,
-        id: req.user.id,
+        id: req.user.id
       });
     }
   });
