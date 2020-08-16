@@ -16,13 +16,13 @@ let questions = [];
 fetch(
   "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple"
 )
-  .then((res) => {
+  .then(res => {
     return res.json();
   })
-  .then((loadedQuestions) => {
-    questions = loadedQuestions.results.map((loadedQuestion) => {
+  .then(loadedQuestions => {
+    questions = loadedQuestions.results.map(loadedQuestion => {
       const formattedQuestion = {
-        question: loadedQuestion.question,
+        question: loadedQuestion.question
       };
 
       const answerChoices = [...loadedQuestion.incorrect_answers];
@@ -42,7 +42,7 @@ fetch(
 
     startGame();
   })
-  .catch((err) => {
+  .catch(err => {
     console.error(err);
   });
 
@@ -62,6 +62,12 @@ startGame = () => {
 getNewQuestion = () => {
   if (availableQuesions.length === 0 || questionCounter >= MAX_QUESTIONS) {
     localStorage.setItem("mostRecentScore", score);
+    $.ajax({
+      type: "PUT",
+      url: "/api/userscore",
+      data: { score: score },
+      dataType: "text/json"
+    });
     //go to the end page
     return window.location.assign("end.html");
   }
@@ -74,8 +80,8 @@ getNewQuestion = () => {
   currentQuestion = availableQuesions[questionIndex];
   question.innerHTML = currentQuestion.question;
 
-  choices.forEach((choice) => {
-    const number = choice.dataset["number"];
+  choices.forEach(choice => {
+    const number = choice.dataset.number;
     choice.innerHTML = currentQuestion["choice" + number];
   });
 
@@ -83,13 +89,15 @@ getNewQuestion = () => {
   acceptingAnswers = true;
 };
 
-choices.forEach((choice) => {
-  choice.addEventListener("click", (e) => {
-    if (!acceptingAnswers) return;
+choices.forEach(choice => {
+  choice.addEventListener("click", e => {
+    if (!acceptingAnswers) {
+      return;
+    }
 
     acceptingAnswers = false;
     const selectedChoice = e.target;
-    const selectedAnswer = selectedChoice.dataset["number"];
+    const selectedAnswer = selectedChoice.dataset.number;
 
     const classToApply =
       selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
@@ -107,7 +115,7 @@ choices.forEach((choice) => {
   });
 });
 
-incrementScore = (num) => {
+incrementScore = num => {
   score += num;
   scoreText.innerText = score;
 };
