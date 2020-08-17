@@ -64,6 +64,24 @@ module.exports = function(app) {
     });
   });
 
+  app.post("/api/newteam", (req, res) => {
+    console.log(req.body.teamname);
+    console.log(req.body.avgscore);
+    console.log(req.body.createdat);
+    console.log(req.body.updatedat);
+
+    db.Team.create({
+      teamname: req.body.teamname,
+      avgScore: req.body.avgscore,
+      createdAt: req.body.createdat,
+      updatedAt: req.body.updatedat
+    }).then(dbTeam => {
+      res.json(dbTeam);
+    });
+    // grab from req body.
+    // find user by id and then update team id.
+  });
+
   app.post("/api/jointeam", (req, res) => {
     console.log(req.body.userid);
     console.log(req.body.teamid);

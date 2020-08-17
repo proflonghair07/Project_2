@@ -17,7 +17,26 @@ $(document).ready(() => {
 
   const joinTeamForm = $(".jointeamform");
   const existingTeam = $("#existingteams");
+  const newTeamForm = $(".teamform");
+  const txtTeamname = $("#teamname");
 
+  newTeamForm.on("submit", event => {
+    event.preventDefault();
+    alert("here");
+    const teamData = {
+      teamname: txtTeamname.val().trim(),
+      avgScore: 0,
+      createdAt: "2020-08-17",
+      updatedAt: "2020-08-17"
+    };
+
+    createTeam(
+      teamData.teamname,
+      teamData.avgScore,
+      teamData.createdAt,
+      teamData.updatedAt
+    );
+  });
 
   joinTeamForm.on("submit", event => {
     event.preventDefault();
@@ -28,6 +47,22 @@ $(document).ready(() => {
     joinTeam(teamData.userId, teamData.teamId);
 
   });
+
+  function createTeam(teamName, avgScore, createdAt, updatedAt) {
+    $.post("/api/newteam", {
+      teamname: teamName,
+      avgscore: avgScore,
+      createdate: createdAt,
+      updatedate: updatedAt
+    })
+      .then(() => {
+        window.location.replace("/teams");
+        // If there's an error, log the error
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
 
   function joinTeam(userId, teamId) {
     $.post("/api/jointeam", {

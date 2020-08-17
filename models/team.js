@@ -3,7 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   const Team = sequelize.define("Team", {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       unique: true,
       primaryKey: true
     },
