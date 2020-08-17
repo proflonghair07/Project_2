@@ -147,3 +147,7 @@ input {
 input::placeholder {
   color: #aaa;
 }
+
+#home {
+  transform: scale(0.3);
+}
