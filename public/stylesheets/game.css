@@ -16,7 +16,7 @@
 
 .choice-prefix {
   padding: 1.5rem 2.5rem;
-  background-color: #56a5eb;
+  background-color: #4b86b4;
   color: white;
 }
 
@@ -26,11 +26,11 @@
 }
 
 .correct {
-  background-color: #28a745;
+  background-color: #90ee90;
 }
 
 .incorrect {
-  background-color: #dc3545;
+  background-color: #ff7070;
 }
 
 /* HUD */
@@ -47,18 +47,19 @@
 
 .hud-main-text {
   text-align: center;
+  color: #4b86b4;
 }
 
 #progressBar {
   width: 20rem;
   height: 4rem;
-  border: 0.3rem solid #56a5eb;
+  border: 0.3rem solid #4b86b4;
   margin-top: 1.5rem;
 }
 
 #progressBarFull {
   height: 3.4rem;
-  background-color: #56a5eb;
+  background-color: #4b86b4;
   width: 0%;
 }
 
@@ -66,7 +67,7 @@
 #loader {
   border: 1.6rem solid white;
   border-radius: 50%;
-  border-top: 1.6rem solid #56a5eb;
+  border-top: 1.6rem solid #4b86b4;
   width: 12rem;
   height: 12rem;
   animation: spin 2s linear infinite;
