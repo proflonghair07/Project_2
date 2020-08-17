@@ -54,10 +54,36 @@ module.exports = function(app) {
     console.log(req.body.score);
   });
 
+  app.get("/api/teams/all", (req, res) => {
+    db.Team.findAll({ raw: true }).then(response => {
+      //      console.log("here");
+//      console.log(response);
+      // console.log(response.data);
+//      console.log(response);
+      res.send(response);
+    });
+  });
+
   app.post("/api/jointeam", (req, res) => {
+    console.log(req.body.userid);
+    console.log(req.body.teamid);
+
+    db.User.update(
+      {
+        teams_id: req.body.teamid
+      },
+      {
+        where: {
+          id: req.body.userid
+        }
+      }
+    ).then(dbTeam => {
+      res.json(dbTeam);
+    });
     // grab from req body.
     // find user by id and then update team id.
   });
+
   app.get("/api/teamscore", (req, res) => {
     // find all teams, avg out user scores.
   });

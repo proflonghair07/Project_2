@@ -1,12 +1,29 @@
+// Creating our Team model
 module.exports = function(sequelize, DataTypes) {
   const Team = sequelize.define("Team", {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      unique: true,
+      primaryKey: true
+    },
     teamname: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
+    // The password cannot be null
     avgScore: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
+      allowNull: false
+    },
+    // eslint-disable-next-line camelcase
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
       allowNull: false
     }
   });
