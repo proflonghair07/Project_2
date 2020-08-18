@@ -1,5 +1,5 @@
 $(document).ready(() => {
-/*  const groupForm = $("form.group");
+  /*  const groupForm = $("form.group");
   const groupInput = $("#group-input");
   groupForm.on("submit", event => {
     event.preventDefault();
@@ -9,9 +9,9 @@ $(document).ready(() => {
   });
 */
 
-  var userId="";
+  let userId = "";
 
-  $.get("/api/user_data").then((data) => {
+  $.get("/api/user_data").then(data => {
     userId = data.id;
   });
 
@@ -22,20 +22,12 @@ $(document).ready(() => {
 
   newTeamForm.on("submit", event => {
     event.preventDefault();
-    alert("here");
     const teamData = {
       teamname: txtTeamname.val().trim(),
-      avgScore: 0,
-      createdAt: "2020-08-17",
-      updatedAt: "2020-08-17"
+      avgScore: 0
     };
 
-    createTeam(
-      teamData.teamname,
-      teamData.avgScore,
-      teamData.createdAt,
-      teamData.updatedAt
-    );
+    createTeam(teamData.teamname, teamData.avgScore);
   });
 
   joinTeamForm.on("submit", event => {
@@ -45,18 +37,15 @@ $(document).ready(() => {
       userId: userId
     };
     joinTeam(teamData.userId, teamData.teamId);
-
   });
 
-  function createTeam(teamName, avgScore, createdAt, updatedAt) {
+  function createTeam(teamName, avgScore) {
     $.post("/api/newteam", {
       teamname: teamName,
-      avgscore: avgScore,
-      createdate: createdAt,
-      updatedate: updatedAt
+      avgscore: avgScore
     })
       .then(() => {
-        window.location.replace("/teams");
+        window.location.replace("/members");
         // If there's an error, log the error
       })
       .catch(err => {
@@ -81,23 +70,24 @@ $(document).ready(() => {
   const helpers = {
     buildDropdown: function(result, dropdown, emptyMessage) {
       // Remove current options
-      dropdown.html('');
+      dropdown.html("");
       // Add the empty option with the empty message
-      dropdown.append('<option value="">' + emptyMessage + '</option>');
+      dropdown.append('<option value="">' + emptyMessage + "</option>");
       // Check result isnt empty
-      if(result != '') {
+      if (result != "") {
         // Loop through each of the results and append the option to the dropdown
-        $.each(result, function(k, v) {
-          dropdown.append('<option value="' + v.id + '">' + v.teamname + '</option>');
+        $.each(result, (k, v) => {
+          dropdown.append(
+            "<option value=\"" + v.id + "\">" + v.teamname + "</option>"
+          );
         });
       }
     }
-  }
-
+  };
 
   $.get("/api/teams/all")
     .then(response => {
-      helpers.buildDropdown(response, $('#existingteams'), "Select an option");
+      helpers.buildDropdown(response, $("#existingteams"), "Select an option");
     })
     .catch(error => {
       console.log(error);
