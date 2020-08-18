@@ -3,6 +3,8 @@
 const db = require("../models");
 const passport = require("../config/passport");
 const axios = require("axios");
+const Sequelize = require("sequelize");
+const { clearConfigCache } = require("prettier");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -49,17 +51,39 @@ module.exports = function(app) {
         }
       }
     ).then(dbScore => {
+      console.log("****************db score*****************");
+      console.log(dbScore);
+      console.log(req.user);
+      db.User.findOne({ where: { id: req.user.id } }).then(dbUser => {
+        console.log(dbUser);
+        const teamId = dbUser.dataValues.teams_id
+        db.User.findAll(
+          {
+            attributes: [[Sequelize.fn("AVG", Sequelize.col("score")), "score"]] // <--- All you need is this
+          },
+          {
+            where: {
+              teams_id: teamId
+            }
+          }
+        ).then(data => {
+          console.log("*******************avg team score******************");
+          //data.dataValues.score
+          //find update here
+          console.log(data);
+        });
+      });
+      console.log(req.body.score);
       res.json(dbScore);
     });
-    console.log(req.body.score);
   });
 
   app.get("/api/teams/all", (req, res) => {
     db.Team.findAll({ raw: true }).then(response => {
       //      console.log("here");
-//      console.log(response);
+      //      console.log(response);
       // console.log(response.data);
-//      console.log(response);
+      //      console.log(response);
       res.send(response);
     });
   });
@@ -67,16 +91,29 @@ module.exports = function(app) {
   app.post("/api/newteam", (req, res) => {
     console.log(req.body.teamname);
     console.log(req.body.avgscore);
-    console.log(req.body.createdat);
-    console.log(req.body.updatedat);
 
     db.Team.create({
       teamname: req.body.teamname,
-      avgScore: req.body.avgscore,
-      createdAt: req.body.createdat,
-      updatedAt: req.body.updatedat
+      avgScore: req.body.avgscore
     }).then(dbTeam => {
-      res.json(dbTeam);
+      console.log(req);
+      console.log(dbTeam);
+      console.log(dbTeam.dataValues.id);
+      const teamId = dbTeam.dataValues.id;
+      const userId = req.user.id;
+
+      db.User.update(
+        {
+          teams_id: teamId
+        },
+        {
+          where: {
+            id: userId
+          }
+        }
+      ).then(dbScore => {
+        res.json(dbScore);
+      });
     });
     // grab from req body.
     // find user by id and then update team id.
@@ -98,8 +135,6 @@ module.exports = function(app) {
     ).then(dbTeam => {
       res.json(dbTeam);
     });
-    // grab from req body.
-    // find user by id and then update team id.
   });
 
   app.get("/api/teamscore", (req, res) => {
