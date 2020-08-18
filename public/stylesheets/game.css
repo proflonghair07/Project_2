@@ -57,10 +57,6 @@
   margin-top: 1.5rem;
 }
 
-.choice-container {
-  transform: scale(0.3);
-}
-
 #progressBarFull {
   height: 3.4rem;
   background-color: #4b86b4;
