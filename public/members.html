@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Passport Authentication</title>
+    <title>Quiz App</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -10,11 +10,11 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
-    <link href="stylesheets/style.css" rel="stylesheet" />
+    <link href="stylesheets/app.css" rel="stylesheet" />
   </head>
 
   <body>
-    <!-- <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="/logout">
@@ -22,74 +22,19 @@
           </a>
         </div>
       </div>
-    </nav> -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-local">
-      <a class="navbar-brand" href="/logout">
-        Logout
-      </a>
-      <a class="navbar-brand" onclick="showHighscore()">View High Scores</a>
-        <span class="navbar-text ml-auto">
-          Timer: <span id="timer">75</span>
-        </span>
-      </div>
     </nav>
 
     <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <h2>Welcome <span class="member-name"></span>!</h2>
-        </div>
+      <div id="home" class="flex-center flex-column">
+        <h1>Quick Quiz</h1>
+        <a class="btn" href="game.html">Play</a>
+        <a class="btn" href="highscores.html">High Scores</a>
       </div>
-      <!-- quiz test -->
-      <div id="start-container">
-        <p>Coding Quiz</p>
-        <button id="start-button">Start Code Quiz</button>
-      </div>
-      <!-- Quiz Body -->
-      <div id="quiz">
-        <div id="questions"><p></p></div>
-        <div id="button-grid">
-          <button id="1" onclick="checkAnswer('one')"></button>
-          <button id="2" onclick="checkAnswer('two')"></button>
-          <button id="3" onclick="checkAnswer('three')"></button>
-          <button id="4" onclick="checkAnswer('four')"></button>
-        </div>
-        <div id="display-correct"></div>
-      </div>
-      <!-- End of quiz div -->
-      <div id="end-display">
-        <div id="score-input"></div>
-        <input
-          type="text"
-          size="40"
-          placeholder="Enter your initials here."
-          name="intials"
-          id="initials"
-        />
-        <button id="submit-button">Submit Score</button>
-        <div id="display-error"></div>
-      </div>
-      <!-- High Score Container -->
-      <div id="highscore-container">
-        <div id="high-score-inner">
-          <div id="high-score-header">
-            <p>User Initials</p>
-            <p>Score</p>
-          </div>
-          <div id="highscore-initials"></div>
-          <div id="highscore-score"></div>
-        </div>
-        <div id="end-buttons">
-          <button id="go-back" onclick="restart()">Go Back</button>
-          <button id="clear-score" onclick="clearScore()">
-            Clear Highscores
-          </button>
-        </div>
-      </div>
-      <!-- quiz test -->
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/velocity-animate@2.0/velocity.ui.min.js"></script>
     <script type="text/javascript" src="js/members.js"></script>
+    <script type="text/javascript" src="js/velocityMembers.js"></script>
   </body>
 </html>

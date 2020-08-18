@@ -2,6 +2,7 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
+const axios = require("axios");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -19,7 +20,6 @@ module.exports = function(app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post("/api/signup", (req, res) => {
-    console.log(req.body);
     db.User.create({
       email: req.body.email,
       password: req.body.password
@@ -33,18 +33,98 @@ module.exports = function(app) {
       });
   });
 
-  app.post("/api/userscore", (req, res) => {
+  app.post("/api/userscore", (req, res) => {});
+
+  app.put("/api/userscore", (req, res) => {
     // db.user.findone update by id
     // find user by id update score key
     // grab request body.
+    db.User.update(
+      {
+        score: req.body.score
+      },
+      {
+        where: {
+          id: req.user.id
+        }
+      }
+    ).then(dbScore => {
+      res.json(dbScore);
+    });
+    console.log(req.body.score);
   });
-  app.post("/api/jointeam", (req, res) => {
+
+  app.get("/api/teams/all", (req, res) => {
+    db.Team.findAll({ raw: true }).then(response => {
+      //      console.log("here");
+//      console.log(response);
+      // console.log(response.data);
+//      console.log(response);
+      res.send(response);
+    });
+  });
+
+  app.post("/api/newteam", (req, res) => {
+    console.log(req.body.teamname);
+    console.log(req.body.avgscore);
+    console.log(req.body.createdat);
+    console.log(req.body.updatedat);
+
+    db.Team.create({
+      teamname: req.body.teamname,
+      avgScore: req.body.avgscore,
+      createdAt: req.body.createdat,
+      updatedAt: req.body.updatedat
+    }).then(dbTeam => {
+      res.json(dbTeam);
+    });
     // grab from req body.
     // find user by id and then update team id.
   });
+
+  app.post("/api/jointeam", (req, res) => {
+    console.log(req.body.userid);
+    console.log(req.body.teamid);
+
+    db.User.update(
+      {
+        teams_id: req.body.teamid
+      },
+      {
+        where: {
+          id: req.body.userid
+        }
+      }
+    ).then(dbTeam => {
+      res.json(dbTeam);
+    });
+    // grab from req body.
+    // find user by id and then update team id.
+  });
+
   app.get("/api/teamscore", (req, res) => {
     // find all teams, avg out user scores.
   });
+
+  app.post("/api/startquiz", (req, res) => {
+    //   console.log("starting quiz api call.");
+
+    axios
+      .get(
+        "https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple"
+      )
+      .then(response => {
+        //      console.log("here");
+        console.log(response.data);
+        // console.log(response.data);
+        res.send(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    //    res.json({});
+  });
+
   // Route for logging user out
   app.get("/logout", (req, res) => {
     req.logout();

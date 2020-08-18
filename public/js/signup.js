@@ -29,8 +29,9 @@ $(document).ready(() => {
       password: password
     })
       .then(() => {
-        window.location.replace("/members");
+        window.location.replace("/teams");
         // If there's an error, handle it by throwing up a bootstrap alert
+        // Eventually will need to go to /teams then go to /members
       })
       .catch(handleLoginErr);
   }
