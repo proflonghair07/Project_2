@@ -1,5 +1,30 @@
+* {
+  color: black;
+  font-family: "Lora", serif;
+}
+
+h1 {
+  text-align: center;
+  vertical-align: center;
+}
+
+h2 {
+  color: black !important;
+}
+
 body {
-  background-color: #adcbe3;
+  background-image: url("https://images.pexels.com/photos/1903702/pexels-photo-1903702.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+a {
+  color: black;
+}
+
+a:hover {
+  color: #2f2f2f;
+  text-decoration: none;
 }
 
 form.signup,
@@ -25,32 +50,21 @@ input {
   text-align: center;
 }
 
-button {
-  display: inline-block;
-  background-color: #3c1261;
-  border-radius: 10px;
-  border: 3px double gray;
-  color: #eeeeee;
-  text-align: left;
-  font-size: 20px;
-  padding: 20px;
-  margin-top: 3px;
-}
-
-button:hover {
-  background-color: #52307c;
-  color: white;
-}
-
 hr {
   border: 1px solid gray;
+}
+
+.jumbotron {
+  background-color: #4b86b4e0;
+  height: 215px;
+  color: black !important;
+  border: 0px solid !important;
 }
 
 .container {
   width: 800px;
   max-width: 80%;
-  background-color: #4b86b480;
-  border: solid;
+  background-color: #4b86b4e0;
   border-radius: 5px;
   padding: 10px;
   align-items: center;
