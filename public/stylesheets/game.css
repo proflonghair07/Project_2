@@ -1,3 +1,7 @@
+p {
+  font-size: 30px;
+}
+
 .choice-container {
   display: flex;
   margin-bottom: 0.5rem;
