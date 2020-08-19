@@ -37,10 +37,33 @@ module.exports = function(app) {
 
   app.post("/api/userscore", (req, res) => {});
 
+  app.get("/api/teams/:id/avg", (req, res) => {
+    db.Team.findByPk(req.params.id).then(team => {
+      db.User.findAll(
+        {
+          attributes: [
+            "id",
+            "score",
+            "teams_id",
+            [Sequelize.fn("SUM", Sequelize.col("score")), "score"]
+          ]
+        },
+        {
+          where: {
+            teams_id: team.id
+          }
+        }
+      ).then(user => {
+        res.json(user);
+      });
+    });
+  });
+
   app.put("/api/userscore", (req, res) => {
     // db.user.findone update by id
     // find user by id update score key
     // grab request body.
+
     db.User.update(
       {
         score: req.body.score
@@ -56,25 +79,38 @@ module.exports = function(app) {
       console.log(req.user);
       db.User.findOne({ where: { id: req.user.id } }).then(dbUser => {
         console.log(dbUser);
-        const teamId = dbUser.dataValues.teams_id
+        const teamId = dbUser.dataValues.teams_id;
+
         db.User.findAll(
           {
-            attributes: [[Sequelize.fn("AVG", Sequelize.col("score")), "score"]] // <--- All you need is this
+            attributes: [
+              "id",
+              "teams_id",
+              [Sequelize.fn("AVG", Sequelize.col("score")), "score"]
+            ] // <--- All you need is this
           },
           {
             where: {
               teams_id: teamId
             }
           }
-        ).then(data => {
-          console.log("*******************avg team score******************");
-          //data.dataValues.score
-          //find update here
-          console.log(data);
+        ).then(userResults => {
+          const user = userResults[0];
+          console.log(`User: ${user.score}`);
+          db.Team.update(
+            {
+              avgScore: user.score
+            },
+            {
+              where: {
+                id: user.teams_id
+              }
+            }
+          ).then(teamResults => {
+            res.json(teamResults);
+          });
         });
       });
-      console.log(req.body.score);
-      res.json(dbScore);
     });
   });
 
