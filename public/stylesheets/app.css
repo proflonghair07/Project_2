@@ -118,6 +118,7 @@ h3 {
   cursor: pointer;
   box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
   transform: translateY(-0.1rem);
+  color: #6688aa;
   transition: transform 150ms;
 }
 
