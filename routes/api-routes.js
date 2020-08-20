@@ -85,22 +85,20 @@ module.exports = function(app) {
         console.log(dbUser);
         const teamId = dbUser.dataValues.teams_id;
 
-        db.User.findAll(
-          {
-            attributes: [
-              "id",
-              "teams_id",
-              [Sequelize.fn("AVG", Sequelize.col("score")), "score"]
-            ]
-          },
-          {
-            where: {
-              teams_id: teamId
-            }
+        db.User.findAll({
+          attributes: [
+            "id",
+            "teams_id",
+            [Sequelize.fn("AVG", Sequelize.col("score")), "score"]
+          ],
+          where: {
+            teams_id: teamId
           }
-        ).then(userResults => {
+        }).then(userResults => {
+          console.log(userResults);
           const user = userResults[0];
           console.log(`User: ${user.score}`);
+          console.log(`Team: ${user.teams_id}`);
           db.Team.update(
             {
               avgScore: user.score
