@@ -48,7 +48,7 @@ fetch(
 
 //CONSTANTS
 const CORRECT_BONUS = 10;
-const MAX_QUESTIONS = 3;
+const MAX_QUESTIONS = 5;
 
 startGame = () => {
   questionCounter = 0;
@@ -68,10 +68,8 @@ getNewQuestion = () => {
       data: { score: score },
       dataType: "text/json"
     });
-    //go to the end page
-//    return window.location.assign("end.html");
-  return window.location.assign("/end");
-}
+    return window.location.assign("/end");
+  }
   questionCounter++;
   progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
   //Update the progress bar
