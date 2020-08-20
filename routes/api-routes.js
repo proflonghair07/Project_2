@@ -37,25 +37,13 @@ module.exports = function(app) {
 
   app.post("/api/userscore", (req, res) => {});
 
-  app.get("/api/teams/:id/avg", (req, res) => {
+  app.get("/api/teams/avg/:id/:max", (req, res) => {
     db.Team.findByPk(req.params.id).then(team => {
-      db.User.findAll(
-        {
-          attributes: [
-            "id",
-            "score",
-            "teams_id",
-            [Sequelize.fn("SUM", Sequelize.col("score")), "score"]
-          ]
-        },
-        {
-          where: {
-            teams_id: team.id
-          }
-        }
-      ).then(user => {
-        res.json(user);
-      });
+      var response = new Object();
+      response.team_id = team.id;
+      response.teamname = team.teamname;
+      response.percentAvg = `${Math.floor((team.avgScore/req.params.max)*req.params.max)}%`;
+      res.json(response);
     });
   });
 
@@ -132,9 +120,9 @@ module.exports = function(app) {
       teamname: req.body.teamname,
       avgScore: req.body.avgscore
     }).then(dbTeam => {
-      console.log(req);
-      console.log(dbTeam);
-      console.log(dbTeam.dataValues.id);
+      // console.log(req);
+      // console.log(dbTeam);
+      // console.log(dbTeam.dataValues.id);
       const teamId = dbTeam.dataValues.id;
       const userId = req.user.id;
 
@@ -151,8 +139,6 @@ module.exports = function(app) {
         res.json(dbScore);
       });
     });
-    // grab from req body.
-    // find user by id and then update team id.
   });
 
   app.post("/api/jointeam", (req, res) => {
