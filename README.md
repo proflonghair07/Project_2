@@ -20,7 +20,7 @@ Then provide the username to save your score
 Play again
 
 
-High Scores Database --> leader board?
+High Scores Database --> leader board
 
 High scores
 Personal
