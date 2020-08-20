@@ -36,7 +36,7 @@ $(document).ready(() => {
             '<li class="list-group-item">' +
               v.teamname +
               " - " +
-              v.avgScore +
+              Math.trunc(v.avgScore) +
               "</li>"
           );
         });
