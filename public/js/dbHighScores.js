@@ -1,4 +1,12 @@
 $(document).ready(() => {
+//  const percentLabel = document.getElementById("percentLabel");
+//  const teamname = document.getElementById('teamname')
+
+//  $.get("http://localhost:8080/api/teams/avg/1/100", result => {
+//    percentLabel.innerText = result.percentAvg;
+//    teamname.innerText = result.teamname;
+//  });
+  
   const userScores = $("#user-scores");
   const teamScores = $("#team-scores");
 

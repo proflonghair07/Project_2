@@ -28,10 +28,16 @@ h1 {
 
 .btn:hover {
   cursor: pointer;
-  box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+  box-shadow: 0 0.4rem 1.4rem 0 #4b86b480;
   transform: translateY(-0.1rem);
   color: #6688aa;
   transition: transform 150ms;
+}
+
+.list-group-item {
+  background-image: url("https://img.freepik.com/free-photo/paperboard-texture_95678-72.jpg?size=626&ext=jpg") !important;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #game-return {

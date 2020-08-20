@@ -8,7 +8,7 @@ $("#home").velocity(
     transform: ["scale(1)", "scale(0.3)"],
   },
   {
-    duration: 800,
+    duration: 575,
   }
 );
 
@@ -18,6 +18,14 @@ $(".choice-container").velocity(
     transform: ["scale(1)", "scale(0.3)"],
   },
   {
-    duration: 800,
+    duration: 500,
   }
 );
+//highscores javascript
+// $(".col-sm").velocity(
+//   {
+//     left: "200px",
+//   },
+//   625,
+//   [500, 40]
+// );
