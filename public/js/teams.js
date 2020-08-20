@@ -45,7 +45,7 @@ $(document).ready(() => {
       avgscore: avgScore
     })
       .then(() => {
-        window.location.replace("/members");
+        window.location.replace("/teams");
         // If there's an error, log the error
       })
       .catch(err => {

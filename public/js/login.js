@@ -26,7 +26,7 @@ $(document).ready(() => {
   function loginUser(email, password) {
     $.post("/api/login", {
       email: email,
-      password: password,
+      password: password
     })
       .then(() => {
         window.location.replace("/members");
