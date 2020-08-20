@@ -56,6 +56,7 @@ hr {
 
 .jumbotron {
   background-color: #4b86b4e0;
+  backdrop-filter: blur(1.5px);
   height: 215px;
   color: black !important;
   border: 0px solid !important;
@@ -64,7 +65,8 @@ hr {
 .container {
   width: 800px;
   max-width: 80%;
-  background-color: #4b86b4e0;
+  background-color: #4b86b4cc;
+  backdrop-filter: blur(2px);
   border-radius: 5px;
   padding: 10px;
   align-items: center;
@@ -75,4 +77,8 @@ hr {
 
 input {
   text-align: left;
+}
+
+#jointeam {
+  margin-top: 15px;
 }
