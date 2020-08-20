@@ -4,7 +4,9 @@ const db = require("../models");
 const passport = require("../config/passport");
 const axios = require("axios");
 const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 const { clearConfigCache } = require("prettier");
+const { json } = require("sequelize");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -12,6 +14,12 @@ module.exports = function(app) {
   // Otherwise the user will be sent an error
   app.post("/api/login", passport.authenticate("local"), (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
+    console.log("UserId:" + req.user.id);
+    console.log("TeamId:" + req.user.teams_id);
+
+    req.session.userId = req.user.id;
+    req.session.teamId = req.user.teams_id;
+
     res.json({
       email: req.user.email,
       id: req.user.id
@@ -35,7 +43,15 @@ module.exports = function(app) {
       });
   });
 
-  app.post("/api/userscore", (req, res) => {});
+  app.get("/api/userscore", (req, res) => {
+    db.User.findAll({
+      order: [["score", "DESC"]],
+      attributes: ["id", "email", "score"],
+      where: { score: { [Op.gte]: [0] } }
+    }).then(user => {
+      res.json(user);
+    });
+  });
 
   app.get("/api/teams/:id/avg", (req, res) => {
     db.Team.findByPk(req.params.id).then(team => {
@@ -49,9 +65,7 @@ module.exports = function(app) {
           ]
         },
         {
-          where: {
-            teams_id: team.id
-          }
+          where: { teams_id: team.id }
         }
       ).then(user => {
         res.json(user);
@@ -87,7 +101,7 @@ module.exports = function(app) {
               "id",
               "teams_id",
               [Sequelize.fn("AVG", Sequelize.col("score")), "score"]
-            ] // <--- All you need is this
+            ]
           },
           {
             where: {
@@ -156,8 +170,7 @@ module.exports = function(app) {
   });
 
   app.post("/api/jointeam", (req, res) => {
-    console.log(req.body.userid);
-    console.log(req.body.teamid);
+    req.session.teamId = req.body.teamid;
 
     db.User.update(
       {
@@ -174,7 +187,13 @@ module.exports = function(app) {
   });
 
   app.get("/api/teamscore", (req, res) => {
-    // find all teams, avg out user scores.
+    db.Team.findAll({
+      order: [["avgScore", "DESC"]],
+      attributes: ["id", "teamname", "avgScore"],
+      where: { avgScore: { [Op.gte]: [0] } }
+    }).then(team => {
+      res.json(team);
+    });
   });
 
   app.post("/api/startquiz", (req, res) => {
@@ -199,11 +218,15 @@ module.exports = function(app) {
   // Route for logging user out
   app.get("/logout", (req, res) => {
     req.logout();
+    req.session.destroy();
     res.redirect("/");
   });
 
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", (req, res) => {
+    console.log("Session User ID: " + req.session.userId);
+    console.log("Session Team ID: " + req.session.teamId);
+
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
