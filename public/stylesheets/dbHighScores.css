@@ -34,6 +34,12 @@ h1 {
   transition: transform 150ms;
 }
 
+.list-group-item {
+  background-image: url("https://img.freepik.com/free-photo/paperboard-texture_95678-72.jpg?size=626&ext=jpg") !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 #game-return {
   margin-top: 20px;
 }
