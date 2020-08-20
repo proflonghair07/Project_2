@@ -8,7 +8,7 @@
 
 :root {
   background-color: #ecf5ff;
-  font-size: 62.5%;
+  font-size: 85%;
 }
 
 body {
@@ -18,12 +18,17 @@ body {
 .navbar-brand {
   font-size: 45px;
   padding-bottom: 5px;
+  height: 80px;
 }
 
+.logout,
+i,
 a {
   color: #e2e5de;
 }
 
+.logout:hover,
+i:hover,
 a:hover {
   color: #b2beb5;
 }
@@ -118,6 +123,7 @@ h3 {
   cursor: pointer;
   box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
   transform: translateY(-0.1rem);
+  color: #6688aa;
   transition: transform 150ms;
 }
 
