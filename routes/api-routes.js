@@ -187,7 +187,7 @@ module.exports = function(app) {
 
     axios
       .get(
-        "https://opentdb.com/api.php?amount=5&category=9&difficulty=medium&type=multiple"
+        "https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple"
       )
       .then(response => {
         //      console.log("here");
