@@ -69,8 +69,9 @@ getNewQuestion = () => {
       dataType: "text/json"
     });
     //go to the end page
-    return window.location.assign("end.html");
-  }
+//    return window.location.assign("end.html");
+  return window.location.assign("/end");
+}
   questionCounter++;
   progressText.innerText = `Question ${questionCounter}/${MAX_QUESTIONS}`;
   //Update the progress bar
