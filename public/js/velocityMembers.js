@@ -21,3 +21,11 @@ $(".choice-container").velocity(
     duration: 800,
   }
 );
+//highscores javascript
+// $(".col-sm").velocity(
+//   {
+//     left: "200px",
+//   },
+//   625,
+//   [500, 40]
+// );
