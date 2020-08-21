@@ -31,7 +31,7 @@ module.exports = function(app) {
   app.get("/members", isAuthenticated, (req, res) => {
     const hbsObject = {};
     res.render("members", hbsObject);
-//    res.sendFile(path.join(__dirname, "../public/members.html"));
+    //    res.sendFile(path.join(__dirname, "../public/members.html"));
   });
 
   app.get("/game", isAuthenticated, (req, res) => {
@@ -39,7 +39,7 @@ module.exports = function(app) {
       layout: "maingames"
     };
     res.render("game", hbsObject);
-//    res.sendFile(path.join(__dirname, "../public/game.html"));  
+    //    res.sendFile(path.join(__dirname, "../public/game.html"));
   });
 
   app.get("/highscores", isAuthenticated, (req, res) => {
