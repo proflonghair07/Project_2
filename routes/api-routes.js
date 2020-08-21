@@ -55,10 +55,12 @@ module.exports = function(app) {
 
   app.get("/api/teams/avg/:id/:max", (req, res) => {
     db.Team.findByPk(req.params.id).then(team => {
-      var response = new Object();
+      const response = new Object();
       response.team_id = team.id;
       response.teamname = team.teamname;
-      response.percentAvg = `${Math.floor((team.avgScore/req.params.max)*req.params.max)}%`;
+      response.percentAvg = `${Math.floor(
+        (team.avgScore / req.params.max) * req.params.max
+      )}%`;
       res.json(response);
     });
   });
@@ -86,11 +88,7 @@ module.exports = function(app) {
         const teamId = dbUser.dataValues.teams_id;
 
         db.User.findAll({
-          attributes: [
-            "id",
-            "teams_id",
-            [Sequelize.fn("AVG", Sequelize.col("score")), "score"]
-          ],
+          attributes: [[Sequelize.fn("AVG", Sequelize.col("score")), "score"]],
           where: {
             teams_id: teamId
           }
@@ -98,14 +96,14 @@ module.exports = function(app) {
           console.log(userResults);
           const user = userResults[0];
           console.log(`User: ${user.score}`);
-          console.log(`Team: ${user.teams_id}`);
+          console.log(`Team: ${teamId}`);
           db.Team.update(
             {
               avgScore: user.score
             },
             {
               where: {
-                id: user.teams_id
+                id: teamId
               }
             }
           ).then(teamResults => {
