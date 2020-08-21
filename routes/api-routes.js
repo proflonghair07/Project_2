@@ -4,9 +4,6 @@ const db = require("../models");
 const passport = require("../config/passport");
 const axios = require("axios");
 const Sequelize = require("sequelize");
-const Op = Sequelize.Op;
-const { clearConfigCache } = require("prettier");
-const { json } = require("sequelize");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -47,7 +44,7 @@ module.exports = function(app) {
     db.User.findAll({
       order: [["score", "DESC"]],
       attributes: ["id", "email", "score"],
-      where: { score: { [Op.gte]: [0] } }
+      where: { score: { [Sequelize.Op.gte]: [0] } }
     }).then(user => {
       res.json(user);
     });
@@ -174,7 +171,7 @@ module.exports = function(app) {
     db.Team.findAll({
       order: [["avgScore", "DESC"]],
       attributes: ["id", "teamname", "avgScore"],
-      where: { avgScore: { [Op.gte]: [0] } }
+      where: { avgScore: { [Sequelize.Op.gte]: [0] } }
     }).then(team => {
       res.json(team);
     });
