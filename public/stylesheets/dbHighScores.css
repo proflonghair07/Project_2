@@ -1,3 +1,11 @@
+* {
+  box-sizing: border-box;
+  font-family: "Lora", serif !important;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
 body {
   background-color: #adcbe3;
 }
@@ -12,6 +20,7 @@ body {
 h1 {
   text-align: center;
   vertical-align: center;
+  font-size: 80px;
 }
 
 .btn {
