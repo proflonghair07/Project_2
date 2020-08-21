@@ -9,13 +9,14 @@ p {
   font-size: 1.8rem;
   border: 0.1rem solid rgb(86, 165, 235, 0.25);
   background-color: white;
+  transition: all 0.2s ease-in-out;
 }
 
 .choice-container:hover {
   cursor: pointer;
   box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
   transform: scale(20);
-  transition: transform 150ms;
+  transform: scale(1.1);
 }
 
 .choice-prefix {
