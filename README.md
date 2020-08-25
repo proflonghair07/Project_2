@@ -9,7 +9,10 @@ Functionalities of the Trivia Aplication:
 ###Installation:To install locally, Clone repo, Npm Install, Insert Schema into MYSQL Workbench,  
 
 
-DEMO:::
+DEMO::: 
+
+![alt text](https://github.com/proflonghair07/Project_2/blob/master/demo/img1.PNG)
+
 
 LINK:::##
 
